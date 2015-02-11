@@ -164,13 +164,40 @@ This document is being updated to use ES6/7 syntax.
     itemsCopy = items.slice();
     ```
 
-  - To convert an array-like object to an array, use Array#slice.
+  - Never use `Array.prototype.slice` to convert `arguments` to an `array`.  Instead, use a [rest parameter](https://6to5.org/docs/learn-es6/#default-rest-spread).
 
     ```javascript
+    // bad
     function trigger() {
       var args = Array.prototype.slice.call(arguments);
-      ...
+      //...
     }
+    // good
+    function triggerRest(...items) {
+      //...
+    }
+    ```
+    
+  - This is also useful when needing to capture an optional variable number of arguments after required arguments.
+
+    ```javascript
+    // bad
+    function nope(name, options) {
+      var extras = Array.prototype.slice.call(arguments, 2);
+      console.log(extras.join(" "));
+      // ...stuff...
+    }
+
+    // good
+    function yup(name, options, ...extras) {
+      console.log(extras.join(" "));
+      // ...stuff...
+    }
+    
+    nope("dave", {person: true}, "Hello", "world");
+    // "Hello world"
+    yup("dave", {person: true}, "Hello", "world");
+    // "Hello world"
     ```
 
 **[⬆ back to top](#table-of-contents)**
@@ -315,27 +342,6 @@ This document is being updated to use ES6/7 syntax.
     }
     ```
     
-  - If you ever need to capture a variable number of passed arguments to a function, never use the `arguments` object.  Use a rest parameter.
-
-    ```javascript
-    // bad
-    function nope(name, options) {
-      var extras = Array.prototype.slice.call(arguments, 2);
-      console.log(extras.join(" "));
-      // ...stuff...
-    }
-
-    // good
-    function yup(name, options, ...extras) {
-      console.log(extras.join(" "));
-      // ...stuff...
-    }
-    
-    nope("dave", {person: true}, "Hello", "world");
-    // "Hello world"
-    yup("dave", {person: true}, "Hello", "world");
-    // "Hello world"
-    ```
 
 **[⬆ back to top](#table-of-contents)**
 
