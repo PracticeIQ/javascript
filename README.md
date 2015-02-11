@@ -1,6 +1,4 @@
-[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/airbnb/javascript?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
-
-# Airbnb JavaScript Style Guide() {
+# PracticeIQ JavaScript Style Guide (forked from AirBNB)
 
 *A mostly reasonable approach to JavaScript*
 
@@ -178,20 +176,20 @@
 
 ## Strings
 
-  - Use single quotes `''` for strings.
+  - Use double quotes `""` for strings.
 
     ```javascript
-    // bad
-    var name = "Bob Parr";
-
-    // good
+    // not ideal
     var name = 'Bob Parr';
 
-    // bad
-    var fullName = "Bob " + this.lastName;
+    // ideal
+    var name = "Bob Parr";
 
-    // good
+    // not ideal
     var fullName = 'Bob ' + this.lastName;
+
+    // ideal
+    var fullName = "Bob " + this.lastName;
     ```
 
   - Strings longer than 80 characters should be written across multiple lines using string concatenation.
@@ -199,18 +197,18 @@
 
     ```javascript
     // bad
-    var errorMessage = 'This is a super long error that was thrown because of Batman. When you stop to think about how Batman had anything to do with this, you would get nowhere fast.';
+    var errorMessage = "This is a super long error that was thrown because of Batman. When you stop to think about how Batman had anything to do with this, you would get nowhere fast.";
 
     // bad
-    var errorMessage = 'This is a super long error that was thrown because \
+    var errorMessage = "This is a super long error that was thrown because \
     of Batman. When you stop to think about how Batman had anything to do \
     with this, you would get nowhere \
-    fast.';
+    fast.";
 
     // good
-    var errorMessage = 'This is a super long error that was thrown because ' +
-      'of Batman. When you stop to think about how Batman had anything to do ' +
-      'with this, you would get nowhere fast.';
+    var errorMessage = "This is a super long error that was thrown because " +
+      "of Batman. When you stop to think about how Batman had anything to do " +
+      "with this, you would get nowhere fast.";
     ```
 
   - When programmatically building up a string, use Array#join instead of string concatenation. Mostly for IE: [jsPerf](http://jsperf.com/string-vs-array-concat/2).
@@ -222,14 +220,14 @@
     var i;
 
     messages = [{
-      state: 'success',
-      message: 'This one worked.'
+      state: "success",
+      message: "This one worked."
     }, {
-      state: 'success',
-      message: 'This one worked as well.'
+      state: "success",
+      message: "This one worked as well."
     }, {
-      state: 'error',
-      message: 'This one did not work.'
+      state: "error",
+      message: "This one did not work."
     }];
 
     length = messages.length;
