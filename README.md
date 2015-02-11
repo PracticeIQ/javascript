@@ -2,6 +2,8 @@
 
 *A mostly reasonable approach to JavaScript*
 
+This document is being updated to use ES6/7 syntax.
+
 
 ## Table of Contents
 
@@ -211,7 +213,7 @@
       "with this, you would get nowhere fast.";
     ```
 
-  - When programmatically building up a string, use Array#join instead of string concatenation. Mostly for IE: [jsPerf](http://jsperf.com/string-vs-array-concat/2).
+  - When programmatically building up a string, use a [template string](http://tc39wiki.calculist.org/es6/template-strings/) and an array join.
 
     ```javascript
     var items;
@@ -250,8 +252,8 @@
       for (i = 0; i < length; i++) {
         items[i] = messages[i].message;
       }
-
-      return '<ul><li>' + items.join('</li><li>') + '</li></ul>';
+      // array join within a template string
+      return `<ul><li>${items.join("</li><li>")}</li></ul>`;
     }
     ```
 
@@ -311,6 +313,28 @@
     function yup(name, options, args) {
       // ...stuff...
     }
+    ```
+    
+  - If you ever need to capture a variable number of passed arguments to a function, never use the `arguments` object.  Use a rest parameter.
+
+    ```javascript
+    // bad
+    function nope(name, options) {
+      var extras = Array.prototype.slice.call(arguments, 2);
+      console.log(extras.join(" "));
+      // ...stuff...
+    }
+
+    // good
+    function yup(name, options, ...extras) {
+      console.log(extras.join(" "));
+      // ...stuff...
+    }
+    
+    nope("dave", {person: true}, "Hello", "world");
+    // "Hello world"
+    yup("dave", {person: true}, "Hello", "world");
+    // "Hello world"
     ```
 
 **[⬆ back to top](#table-of-contents)**
