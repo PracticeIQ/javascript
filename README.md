@@ -205,7 +205,7 @@ This document is being updated to use ES6/7 syntax.
 
 ## Strings
 
-  - Use double quotes `""` for strings.
+  - Use double quotes `""` for strings, as well as [template strings](http://tc39wiki.calculist.org/es6/template-strings/) instead of concatenation.
 
     ```javascript
     // not ideal
@@ -218,7 +218,7 @@ This document is being updated to use ES6/7 syntax.
     var fullName = 'Bob ' + this.lastName;
 
     // ideal
-    var fullName = "Bob " + this.lastName;
+    var fullName = `Bob  ${this.lastName}`;
     ```
 
   - Strings longer than 80 characters should be written across multiple lines using string concatenation.
@@ -495,6 +495,22 @@ This document is being updated to use ES6/7 syntax.
       var name = getName();
 
       return true;
+    }
+    ```
+
+- When a variable is only going to be used within an `if` block or a `for` block (or other similar blocks), define it using `let` instead of `var`.  This will keep the variable from leaking into the parent scope and helps in memory management.
+
+    ```javascript
+    function example() {
+      var someArray = [1, 2, 3]
+      // bad
+      for (var i of someArray) {
+        // ...
+      }
+      // good
+      for (let i of someArray) {
+        // ...
+      }
     }
     ```
 
