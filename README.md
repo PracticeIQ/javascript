@@ -1036,7 +1036,7 @@ This document is being updated to use ES6/7 syntax.
 
 ## Type Casting & Coercion
 
-  - Perform type coercion at the beginning of the statement.
+  - Use template strings instead of concatenation when casting strings.
   - Strings:
 
     ```javascript
@@ -1046,19 +1046,19 @@ This document is being updated to use ES6/7 syntax.
     var totalScore = this.reviewScore + '';
 
     // good
-    var totalScore = '' + this.reviewScore;
+    var totalScore = `${this.reviewScore}`;
 
     // bad
     var totalScore = '' + this.reviewScore + ' total score';
 
     // good
-    var totalScore = this.reviewScore + ' total score';
+    var totalScore = `${this.reviewScore} total score`;
     ```
 
   - Use `parseInt` for Numbers and always with a radix for type casting.
 
     ```javascript
-    var inputValue = '4';
+    var inputValue = "4";
 
     // bad
     var val = new Number(inputValue);
